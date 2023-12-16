@@ -5,19 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jens og karsten</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-    <h1>Billeder</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <h2>Upload</h2>
-        <input type="file" name="imgname" value="filnavn">
-        <input type="submit" value="upload">
-    </form>
-    {% for pth in images %}
-    <img src={{pth}} style="width: 200px;">
-    {% endfor %}
+<body class="bg-gray-800 text-white">
+    <h1 class="text-center text-9xl">Jens. Og Karsten</h1>
+    <div class="w-full flex justify-center m-10">
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <h2 class="text-xl">Upload selv billeder</h2>
+            <input type="file" name="imgname" value="filnavn">
+            <input type="submit" value="upload">
+        </form>
+    </div>
 
+    <div class="flex w-full flex-wrap items-end justify-center">
+        {% for img in images %}
+        <div class="flex flex-col m-10 justify-spread" style="width: 40rem; height: 40rem">
+            <img src={{img.path}}>
+            <div class="flex flex-row justify-center">
+                <p class="m-5">From {{img.name}}</p>
+                <p class="m-5">At {{img.time}}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </body>
 
 </html>
