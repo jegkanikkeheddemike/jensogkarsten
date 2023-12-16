@@ -11,10 +11,10 @@
 <body class="bg-gray-800 text-white">
     <h1 class="text-center text-7xl">Jens. Og Karsten</h1>
     <div class="w-full flex justify-center m-10">
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <h2 class="text-xl">Post dine billeder</h2>
-            <input type="file" name="imgname" value="filnavn">
-            <input type="submit" value="upload" class="bg-white rounded-md text-black px-2 py-1">
+        <form action="/upload" method="post" enctype="multipart/form-data" class="flex flex-col">
+            <h2 class="text-xl m-2">Post dine billeder</h2>
+            <input type="file" name="imgname" value="filnavn" class="m-2">
+            <input type="submit" value="upload" class="bg-white rounded-md text-black px-2 py-1 m-2">
         </form>
     </div>
 
