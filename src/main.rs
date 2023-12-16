@@ -7,6 +7,7 @@ use axum::{
     routing::{get, post},
     Router,
 };
+use tokio::process::Command;
 use tower_http::services::ServeDir;
 
 #[tokio::main]
@@ -16,7 +17,8 @@ async fn main() {
     let app = Router::new()
         .nest_service("/static", serve_dir)
         .route("/", get(index))
-        .route("/upload", post(upload));
+        .route("/upload", post(upload))
+        .route("/reload", post(reload));
 
     let addr = {
         #[cfg(debug_assertions)]
@@ -60,4 +62,8 @@ async fn upload(mut multipart: Multipart) -> impl IntoResponse {
         fs::write(path, bytes).unwrap();
     }
     Redirect::to("/")
+}
+
+async fn reload() -> impl IntoResponse {
+    Command::new("git").arg("pull").spawn().unwrap();
 }
