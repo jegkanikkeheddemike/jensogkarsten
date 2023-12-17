@@ -18,6 +18,10 @@ use tower_http::services::ServeDir;
 
 #[tokio::main]
 async fn main() {
+    if fs::read_dir("./static").is_err() {
+        fs::create_dir("./static").unwrap();
+    }
+
     let serve_dir = ServeDir::new("static");
 
     let app = Router::new()
